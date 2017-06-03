@@ -1,0 +1,58 @@
+{%load static%}
+    {%for book in books%}
+        <div class="col-md-3 img mb10">
+            <div class="col-md-12 block-img">
+                <img class="img-responsive book-img" src="{{book.img.url}}" alt="{{book.img}}">
+            <div class="col-md-12 shadow-bg">
+                <div class="col-md-10 col-md-offset-1 img-block-text">
+                <div class="row">
+                    <div class="col-md-10">
+                        <h3>{{book.title}}</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <img src="{%static "img/line-catalog.png"%}" alt="line-catalog">
+                    </div>
+                </div>
+                <div class="row mt10">
+                    <div class="col-md-12">
+                        <p>{{book.author.name}}</p>
+                        <p>{{book.author.last_name}}</p>
+                    </div>
+                </div>
+                {%if user.is_authenticated%}
+                <div class="row mt40" id="block-work-book">
+                    <div class="col-md-10">
+                        <img src="{%static "img/like-book.png"%}" alt="like-book" class="like-book" data-id="{{book.id}}">
+                        <img src="{%static "img/link-book.png"%}" alt="link-book" class="link-book" data-id="{{book.id}}">
+                    </div>
+                </div>
+                <div class="row mt10">
+                    <div class="col-md-10">
+                        <a href="/book/{{book.id}}/#book-more" class="more">Подробнее &raquo;</a>
+                    </div>
+                </div>
+                <div class="row mt10">
+                    <div class="col-md-12" id="mark-link">
+                        {%for book_taken in user.profile.list_books_taken.all%}
+                        {%if book_taken == book%}
+                        <h3>Вы взяли эту книгу</h3>
+                        {%endif%}
+                        {%endfor%}
+                    </div>
+                    <div class="col-md-12" id="mark-like">
+                        {%for book_favorites in user.profile.list_books_favorites.all%}
+                        {%if book_favorites == book%}
+                        <h3>В избранном</h3>
+                        {%endif%}
+                        {%endfor%}
+                    </div>
+                </div>
+                {%endif%}
+            </div>
+            </div>
+            </div>
+        </div>
+    {%endfor%}
+    

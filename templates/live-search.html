@@ -1,0 +1,13 @@
+{%if type == 'users'%}
+{%for user in users%}
+    <li data-id="{{user.id}}" data-type="{{type}}">{{user.username}}</li>
+{%endfor%}
+{%elif type == 'books'%}
+{%for book in books%}
+    <li data-id="{{book.id}}" data-type="{{type}}">{{book.title}}</li>
+{%endfor%}
+{%elif type == 'news'%}
+{%for news_item in news%}
+    <li data-id="{{news_item.id}}" data-type="{{type}}">{{news_item.title}}</li>
+{%endfor%}
+{%endif%}

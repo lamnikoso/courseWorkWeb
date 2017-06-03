@@ -1,0 +1,25 @@
+{%load static%}
+{%for news in list_news%}
+<section class="news-more">
+        <a name="news-more"></a>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-1 mt70 block-header-text">
+                    <h3>{{news.title}}</h3>
+                    <p class="italic">BY <span>{{news.author}}</span></p>
+                    <p class="mt10"><span id="like-news-update">{{news.like}}</span> Нравится - {{news.viewing}} Просмотрено - {{news.publication_date}} Дата публикации</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7 col-md-offset-1 mt60">
+                    <p>{{news.description}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-md-offset-1 mt40">
+                    <p class="more"><a href="/news/{{news.id}}/#news-more">Читать больше &raquo;</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+{%endfor%}

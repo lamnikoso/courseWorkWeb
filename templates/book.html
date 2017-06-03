@@ -1,0 +1,105 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+
+    <section class="subscribe">
+        <div class="container">
+            <div class="row mt50">
+                <div class="col-md-4 col-md-offset-4">
+                    <h2>ПОДПИСАТЬСЯ НА НАС</h2>
+                </div>
+            </div>
+            <div class="row mt30">
+                <div class="col-md-6 col-md-offset-3">
+                    <p>Если Вы хотите получать уведомления от Нашего сервиса о всех новостях, тогда Добро Пожаловать!</p>
+                </div>
+            </div>
+            <div class="row mt30">
+                <div class="col-md-6 col-md-offset-3">
+                    <form action="#">
+                        <input type="email" placeholder="Введите свой email" class="input">
+                        <input type="submit" class="send" value="ГОТОВО">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="book-more">
+        <a name="book-more"></a>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mt70">
+                    <img src="{{book.img.url}}" alt="{{book.img}}" class="book-more-img">
+                </div>
+                <div class="col-md-7 col-md-offset-1 mt70 block-header-text">
+                    <h3>{{book.title}}</h3>
+                    <p class="italic">BY <span>{{book.author}}</span></p>
+                    {%if user.is_authenticated%}
+                    {%if check%}
+                        <img src="{%static "img/like-news-active.png"%}" alt="like" id="like-book" data-id-book="{{book.id}}">
+                    {%else%}
+                        <img src="{%static "img/like-news.png"%}" alt="like" id="like-book" data-id-book="{{book.id}}">
+                    {%endif%}
+                    {%endif%}
+                    <p class="mt10">Статус: {{book.get_status}} - <span id="like-book-update">{%if check%} В избранном {%else%} {%endif%}</span></p>
+                </div>
+                {%if user.is_authenticated%}
+                 <div class="col-md-7 col-md-offset-1 block-header-text">
+                     {%for book_user in book.profile_set.all%}
+                        {%if user == book_user.user%}
+                        <p class="italic"><span>Вы взяли книгу</span></p>
+                        {%endif%}
+                     {%endfor%}
+                     {%for book_item in book.booktaken_set.all%}
+                     {%if book_item.profile == user.profile%}
+                     <p class="italic-message">{{book_item.get_date_pass}}</p>
+                     {%endif%}
+                     {%endfor%}
+                {%if user.is_superuser%}
+                    <p class="italic"><span>Книгу взяли - </span>
+                    {%for user_book in book.profile_set.all%}
+                    {{user_book.user.username}}
+                    {%endfor%}
+                    </p>
+                {%endif%}
+                </div>
+                {%endif%}
+                <div class="col-md-7 col-md-offset-1 mt60">
+                    <p>{{book.annotation}}</p>
+                </div>
+                <div class="col-md-3 col-md-offset-1 mt40">
+                    <p class="more"><a href="{{request.META.HTTP_REFERER}}">&laquo; Назад</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="end mt100">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row mt60">
+                        <div class="col-md-4">
+                            <h2>Впечатлены ?</h2>
+                        </div>
+                    </div>
+                    <div class="row mt40">
+                        <div class="col-md-12">
+                            <p>Мы надеемся, что смогли Вас приятно удивить и предоставить Вам удобный и приятный во всех отношения сервис для подбора книг на любой вкус</p>
+                        </div>
+                    </div>
+                    <div class="row mt20">
+                        <div class="col-md-6 block-text">
+                            <p>- <span class="author">ADMIN</span> <br> ГЛАВА БИБЛИОТЕКИ, <span class="group">КНИГОМАНИЯ</span> </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 col-md-offset-1 nmt120 display">
+                    <img src="{%static "img/display.png"%}" alt="display" id="display">
+                </div>
+            </div>
+        </div>
+    </section>
+
+{%endblock%}

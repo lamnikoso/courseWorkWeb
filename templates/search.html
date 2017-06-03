@@ -1,0 +1,56 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+    <div class="container mt70 mb60 search">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <input type="text" id="text_for_search">
+                <ul id="live-search">
+                    {%include 'live-search.html'%}
+                </ul>
+            </div>
+        </div>
+        <div class="row mt30">
+            <div class="col-md-6 col-md-offset-3">
+                <a href="javascript: void(0)" class="send" id="search">ПОИСК</a>
+            </div>
+        </div>
+        <div class="row mt40">
+            <div class="col-md-6 col-md-offset-3 search-type">
+                <p class="active" data-type="books">Книги</p>
+                {%if user.is_superuser%}
+                <p data-type='users'>Пользователи</p>
+                <p data-type='news'>Новости</p>
+                {%endif%}
+            </div>
+        </div>
+
+        <div class="row mt20">
+            <div class="col-md-6 col-md-offset-3 search-category">
+                <div class="search-books">
+                    <p class="active" data-cat="title">Название</p>
+                    <p data-cat="genre">Жанр</p>
+                    <p data-cat="author">Автор</p>
+                    <p data-cat="list_books_taken">Взятые</p>
+                    <p data-cat="list_books_favorites">В избранном</p>
+                    <p data-cat="debt">Необходимо сдать</p>
+                </div>
+                <div class="search-users">
+                    <p class="active" data-cat="username">Логин</p>
+                    <p data-cat="first_name">Имя</p>
+                    <p data-cat="last_name">Фамилия</p>
+                    <p data-cat="phone">Номер телефона</p>
+                    <p data-cat="debt-users">Должники</p>
+                </div>
+                <div class="search-news">
+                    <p class="active" data-cat="title">Название</p>
+                    <p data-cat="author">Автор</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="line" class="mt20"></div>
+        <div id="block-search" class="mt20"></div>
+    </div>
+
+{%endblock%}

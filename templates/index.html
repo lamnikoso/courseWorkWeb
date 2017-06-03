@@ -1,0 +1,340 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+    <section class="services container mt70">
+        <a name="about"></a>
+        <div class="row">
+            <div class="col-md-5 col-md-offset-2">
+                <h3>О НАС</h3>
+                <p> 11 сентября 2016 года исполнилось 5 лет со дня открытия для читателей Казанской библиотеки — публичной библиотеки Казани, основанной в 2011 году. Все эти годы Библиотека – ныне одна из крупнейших в Казани – служит российской культуре и науке, хранит национальную память, способствует просвещению населяющих Россию народов и распространению идей гуманизма.</p>
+                <p> Миссия Библиотеки — собирание, сохранение и предоставление в общественное пользование универсального фонда документов, отражающих накопленные человечеством знания и имеющих отношение, прежде всего, к России и ее национальным интересам. Известная в Казани как сокровищница письменности, КНИГОМАНИЯ занимает исключительное место в истории русской и мировой культуры.</p>
+                <div class="row mt30">
+                    <div class="col-md-5">
+                        <p class="more"><a href="#about_more">Читать больше</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-md-offset-1">
+                <img src="{%static "img/ipad.png"%}" alt="book" id="ipad">
+            </div>
+        </div>
+    </section>
+
+    {%if news is not None%}
+    <section class="news mt80">
+        <a name="news"></a>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mt70">
+                    <h3>ПОСЛЕДНИЕ НОВОСТИ</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 mt40 block-text">
+                    <p>В данном разделе будут выводиться самые свежие новости о жизни библиотеки и прочая полезная информация из мира просвещения.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 col-md-offset-1 mt70 block-header-text">
+                    <h4>{{news.title}}</h4>
+                    <p class="italic">BY <span>{{news.author}}</span></p>
+                    <p>{{news.like}} Нравится - {{news.viewing}} Просмотрено - {{news.publication_date}} Дата публикации</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-md-offset-1 mt60">
+                    <p>{{news.description}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-md-offset-1 mt40">
+                    <p class="more"><a href="/news/{{news.id}}/#news-more">Читать больше &raquo;</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    {%endif%}
+
+    <section class="contact">
+        <a name="contact"></a>
+        <div class="container">
+            <div class="row block-header-text">
+                <div class="col-md-2 col-md-offset-5 mt40">
+                    <h2>НАШИ КОНТАКТЫ</h2>
+                </div>
+                <div class="col-md-6 col-md-offset-3 mt30">
+                    <p>Здесь Вы можете увидеть все Наши контакты, чтобы связаться с Нами</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 mt30">
+                    <div class="col-md-4 block-content">
+                        <img src="{%static "img/email.png"%}" alt="email" id="email">
+                        <div class="block-main-text">
+                            <h3>ПОЧТА</h3>
+                            <p>odm.llovecoffe@gmail.com <br> example@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 block-content">
+                        <img src="{%static "img/locale.png"%}" alt="locale" id="locale">
+                        <div class="block-main-text">
+                            <h3>РАСПОЛОЖЕНИЕ</h3>
+                            <p>Big Red 55 <br> Kazan</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 block-content">
+                        <img src="{%static "img/phone.png"%}" alt="phone" id="phone">
+                        <div class="block-main-text">
+                            <h3>ТЕЛЕФОН</h3>
+                            <p>8 917 913 19 14 <br> 8 855 539 45 54</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="subscribe mt80">
+        <div class="container">
+            <div class="row mt50">
+                <div class="col-md-4 col-md-offset-4">
+                    <h2>ПОДПИСАТЬСЯ НА НАС</h2>
+                </div>
+            </div>
+            <div class="row mt30">
+                <div class="col-md-6 col-md-offset-3">
+                    <p>Если Вы хотите получать уведомления от Нашего сервиса о всех новостях, тогда Добро Пожаловать!</p>
+                </div>
+            </div>
+            <div class="row mt30">
+                <div class="col-md-6 col-md-offset-3">
+                    <form action="#">
+                        <input type="email" placeholder="Введите свой email" class="input">
+                        <input type="submit" class="send" value="ГОТОВО">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {%if user.is_authenticated and user.is_superuser%}
+    <section class="update mt60">
+        <a name="services"></a>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <h2>УСЛУГИ</h2>
+                </div>
+            </div>
+            <div class="row mt20">
+                <div class="col-md-6 col-md-offset-3">
+                    <p>Этот раздел предназначен для Администратора, чтобы производить все необходимые манипуляции с сервисом</p>
+                </div>
+            </div>
+        </div>
+        <div class="row mt60">
+            <div class="col-lg-6 bgc">
+                <img class="img-responsive" src="{%static "img/book1.png"%}" alt="book1">
+                <div class="shadow">
+                    <h3>НОВОСТИ</h3>
+                </div>
+                <div class="plus col-md-2 col-md-offset-5">
+                    <a href="/admin/news/news/"><img src="{%static "img/more.png"%}" alt="more"></a>
+                </div>
+            </div>
+            <div class="col-lg-3 bgc">
+                <img class="img-responsive" src="{%static "img/book2.png"%}" alt="book2">
+                <div class="shadow">
+                    <h3>КНИГИ</h3>
+                </div>
+                <div class="plus col-md-2 col-md-offset-5"><a href="/admin/book/book/"><img src="{%static "img/more.png"%}" alt="more"></a></div>
+            </div>
+            <div class="col-lg-3 bgc">
+                <img class="img-responsive" src="{%static "img/book3.png"%}" alt="book3">
+                <div class="shadow">
+                    <h3>ПОЛЬЗОВАТЕЛИ</h3>
+                </div>
+                <div class="plus col-md-2 col-md-offset-5"><a href="/admin/auth/user/"><img src="{%static "img/more.png"%}" alt="more"></a></div>
+            </div>
+        </div>
+        <div class="row submit">
+            <div class="container">
+                <div class="col-md-9 mt30">
+                    <p>Если Вам необходимо необходимо больше <span>Возможностей</span>, то перейдите на сайт <span>Администратора</span></p>
+                </div>
+                <div class="col-md-2 col-md-offset-1 mt40">
+                    <p class="send"><a href="/admin/">ПЕРЕЙТИ</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    {%endif%}
+
+    {%if not user.is_authenticated%}
+    <section class="log-in">
+        <a name="log-in"></a>
+        <div class="container">
+            <div class="row mt60">
+                <div class="col-md-4 col-md-offset-4">
+                    <h3>АВТОРИЗАЦИЯ</h3>
+                </div>
+                <div class="col-md-6 col-md-offset-3">
+                    <p>Для того, чтобы воспользоваться нашим сервисом, Вам необходимо авторизоваться в системе, используя свой <span>Логин</span> и <span>Пароль</span>.</p>
+                </div>
+            </div>
+            <div class="row mb60">
+                <div class="col-md-10 col-md-offset-1">
+                    <form action="/log_in/" method="POST">
+                        {% csrf_token %}
+                        <input type="text" placeholder="Введите логин" class="input" id="username" name="username"><br>
+                        <input type="password" placeholder="Введите пароль" class="input mt30" id="password" name="password"><br>
+                        <input type="submit" value="ВОЙТИ" class="send mt30"><br>   
+                        <p class="mt30"><a href="/register/" class="send">РЕГИСТРАЦИЯ</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    {%endif%}
+
+    <section class="about">
+        <a name="about_more"></a>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4 mt40">
+                    <h3>ПОДРОБНО О КНИГОМАНИИ</h3>
+                </div>
+                <div class="col-md-6 col-md-offset-3">
+                    <p>КНИГОМАНИЯ СЕГОДНЯ</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="col-md-4"><img src="{%static "img/like.png"%}" alt="like" id="like"></div>
+                    <div class="col-md-4"><img src="{%static "img/mouse.png"%}" alt="mouse" id="mouse"></div>
+                    <div class="col-md-4"><img src="{%static "img/lamp.png"%}" alt="lamp" id="lamp"></div>
+                </div>
+            </div>
+            <div class="row mt60 block-text">
+                <div class="col-md-2 col-md-offset-1">
+                    <h4>Новые идеи</h4>
+                </div>
+            </div>
+            <div class="row mt30 block-text mb30">
+                 <div class="col-md-3 col-md-offset-1 fs16">
+                     <p>Совершенствуя обслуживание, <span class="green">КнигоМания</span> развивается также как <span class="gray">современное научно-информационное, научно-исследовательское, образовательное, культурно-просветительное</span> учреждение федерального значения в области библиотечного дела, библиографии и книговедения.</p>
+                </div>
+                <div class="col-md-6 col-md-offset-1">
+                    <p>В фондах Библиотеки хранится около <span class="green">70 тыс. экз. произведений печати и иных информационных ресурсов</span>, в том числе и на электронных носителях, доступных широкому кругу пользователей. Ежегодно <span class="gray">КнигоМанию</span> посещает более <span class="green">35 тыс. читателей</span>, которым выдается свыше 5 тыс. экз. ед. хр., к ее электронным ресурсам обращаются за год свыше 230 тыс удаленных пользователей. <span class="gray">В 2015 г. в Библиотеке</span> был введен единый читательский билет, и отменены любые возрастные и образовательные ограничения на посещение читальных залов всеми категориями читателей, которым обеспечена полная доступность информационных ресурсов.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="already">
+        <div class="already-shadow">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4 mt30">
+                        <h3>Уже полюбили Нас? Тогда Мы ждем Вас!</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4 mt20">
+                        <p class="send"><a href="#contact">Наши контакты</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="catalog">
+        <a name="catalog"></a>
+        <div class="container">
+            <div class="row mt50">
+                <div class="col-md-2 col-md-offset-5">
+                    <h2>КАТАЛОГ</h2>
+                </div>
+            </div>
+            <div class="row mt40">
+                <div class="col-md-6 col-md-offset-3">
+                    <p>В Нашем книжном фонде собраны все самые новые книги различных жанров</p>
+                </div>
+            </div>
+            <div class="row mb50">
+                <nav class="col-md-12 nav-catalog mt80">
+                    <ul>
+                        <li><a href="javascript: void(0)" data-title="0">Все жанры</a><div class="floor line"></div></li>
+                        {%for g in genre%}
+                            <li class="mt10"><a href="javascript: void(0)" data-title="{{g.id}}">{{g.title}}</a><div class="floor"></div></li>
+                        {%endfor%}
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="row" id="block-catalog">
+            {%include 'catalog.html'%}
+            </div>
+             <!--<ul class="breadcrumb">
+                    <li class="step-links">
+                    {% if books.has_previous %}
+                        <a href="?page={{ books.previous_page_number }}"> &laquo; Назад</a>
+                    {% endif %}
+                    </li>
+                    <li class="current">
+                    Сейчас {{ books.number }} из {{ books.paginator.num_pages }}.
+                    </li>
+
+                    <li class="step-links">
+                    {% if books.has_next %}
+                        <a href="?page={{ books.next_page_number }}">Вперед &raquo;</a>
+                    {% endif %}
+                    </li>
+                </div>-->
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-12 bg-catalog-bottom mt60">
+                        <div class="row mt40">
+                            <div class="col-md-8 col-md-offset-2">
+                                <p>Если <span>Вы</span> не нашли интересующую <span>Книгу</span> в Нашем каталоге, то попробуйте её найти с помощью <span>Волшебной</span> кнопки ниже</p>
+                            </div>
+                        </div>
+                        <div class="row mt20">
+                            <div class="col-md-2 col-md-offset-5">
+                                <p class="send"><a href="/search/">Начать поиск</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="end mt100">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row mt60">
+                        <div class="col-md-4">
+                            <h2>Впечатлены ?</h2>
+                        </div>
+                    </div>
+                    <div class="row mt40">
+                        <div class="col-md-12">
+                            <p>Мы надеемся, что смогли Вас приятно удивить и предоставить Вам удобный и приятный во всех отношения сервис для подбора книг на любой вкус</p>
+                        </div>
+                    </div>
+                    <div class="row mt20">
+                        <div class="col-md-6 block-text">
+                            <p>- <span class="author">ADMIN</span> <br> ГЛАВА БИБЛИОТЕКИ, <span class="group">КНИГОМАНИЯ</span> </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 col-md-offset-1 nmt120 display">
+                    <img src="{%static "img/display.png"%}" alt="display" id="display">
+                </div>
+            </div>
+        </div>
+    </section>
+{%endblock%}

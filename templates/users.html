@@ -1,0 +1,22 @@
+{%load static%}
+    {%for user in users%}
+        <div class="col-md-6 col-md-offset-3">
+            <h2> - Пользователь <span class="data">{{user.username}}</span> - </h2>
+            <p class="data">Имя - <span class="data-info">{{user.first_name}}</span> и Фамилия - <span class="data-info">{{user.last_name}}</span></p>
+            <p class="data">Адрес - <span class="data-info">{{user.profile.address}}</span> и Номер телефона - <span class="data-info">{{user.profile.phone}}</span></p>
+            <h3> - Книги на руках - </h3>
+            {%for book in user.profile.list_books_taken.all%}
+                <p class="data"><span class="data-info">{{book.title}}</span></p>
+            {%endfor%}
+            <h3> - Книги в Избранном - </h3>
+            {%for book in user.profile.list_books_favorites.all%}
+                <p class="data"><span class="data-info">{{book.title}}</span></p>
+            {%endfor%}
+            <h3> - Книги необходимо сдать - </h3>
+            {%for book_taken in user.profile.booktaken_set.all%}
+                {%if book_taken.date_pass < date%}
+                <p class="data"><span class="data-info">{{book_taken.book.title}}</span></p>
+                {%endif%}
+            {%endfor%}
+        </div>
+    {%endfor%}
